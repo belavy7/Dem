@@ -1,0 +1,90 @@
+drop database DB;
+Create database DB;
+use DB;
+
+create table Users
+(userID int primary key auto_increment not null,
+fio varchar(40) not null,
+phone varchar(11) not null,
+login varchar(40)  not null,
+password varchar(40) not null,
+type varchar(40) not null
+);
+
+
+create table clients(
+clientsID int primary key auto_increment not null,
+fio varchar(40) not null
+);
+
+create table masters(
+masterID int primary key auto_increment not null,
+fio varchar(40) not null
+);
+
+
+insert into clients (fio) value
+("GGG"),
+("FDF"),
+("dad"),
+("dadsad"),
+("dadas"),
+("dadasxz"),
+("GGG"),
+("FDF"),
+("dad"),
+("dadsad"),
+("dadas"),
+("dadasxz");
+
+
+insert into masters (fio) value
+("dad"),
+("GGG"),
+("FDF"),
+("dad"),
+("dadsad"),
+("dadas"),
+("dadasxz"),
+("GGG"),
+("FDF"),
+("dad"),
+("dadsad"),
+("dadas"),
+("dadasxz");
+
+
+
+create table Zaivki
+(
+requestID int primary key auto_increment not null,
+startDate date not null,
+computerTechType varchar(100) not null,
+computerTechModel varchar(100) not null,
+problemDescryption varchar(100) not null,
+requestStatus varchar(100) not null,
+completionDate date,
+repairParts varchar(100),
+masterID int,
+foreign key (masterID) references masters(masterID)
+on update cascade
+on delete cascade,
+clientsID int not null,
+foreign key (clientsID) references clients(clientsID)
+on update cascade
+on delete cascade
+);
+
+create table comments(
+commentID int primary key not null auto_increment,
+message varchar(100) not null,
+masterID int,
+foreign key (masterID) references masters(masterID)
+on update cascade
+on delete cascade,
+ requestID int not null,
+foreign key (requestID ) references Zaivki (requestID )
+on update cascade
+on delete cascade
+)
+
